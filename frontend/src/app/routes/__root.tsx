@@ -39,7 +39,7 @@ function RootLayout() {
       <Toaster
         position="bottom-center"
         theme="dark"
-        icons={{ success: <Check className="h-4 w-4 text-[#e50914]" /> }}
+        icons={{ success: <Check className="h-4 w-4 text-[#16a34a]" /> }}
         toastOptions={{
           style: {
             background: "#181818",

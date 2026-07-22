@@ -438,7 +438,7 @@ export function HeroBanner({ item, mediaType }: HeroBannerProps) {
 
       <div className="relative z-10 mx-auto flex h-full max-w-none flex-col justify-end px-4 pb-12 sm:px-8 sm:pb-24">
         <div className="mb-3 flex items-center gap-2 sm:mb-4">
-          <span className="h-5 w-[3px] rounded-full bg-[#e50914] sm:h-6" />
+          <span className="h-5 w-[3px] rounded-full bg-[#16a34a] sm:h-6" />
           <span className="text-[11px] font-semibold uppercase tracking-[0.35em] text-white/70 text-shadow-hero sm:text-xs">
             {mediaType === "movie" ? "C Film" : "C Series"}
           </span>

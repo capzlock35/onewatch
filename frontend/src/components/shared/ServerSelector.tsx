@@ -23,7 +23,7 @@ export function ServerSelector() {
                 onClick={() => setServer(s.id)}
                 className={`rounded px-4 py-1.5 text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 ${
                   serverId === s.id
-                    ? "bg-[#e50914] text-white hover:bg-[#f40612]"
+                    ? "bg-[#16a34a] text-white hover:bg-[#22c55e]"
                     : "bg-[#2a2a2a] text-white/70 hover:bg-[#3a3a3a] hover:text-white"
                 }`}
               >

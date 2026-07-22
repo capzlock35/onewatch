@@ -243,7 +243,7 @@ export function SearchDialog({
                 className={cn(
                   "inline-flex shrink-0 items-center gap-1.5 rounded px-3.5 py-1.5 text-xs font-semibold transition",
                   filter === key
-                    ? "bg-[#e50914] text-white hover:bg-[#f40612]"
+                    ? "bg-[#16a34a] text-white hover:bg-[#22c55e]"
                     : "bg-[#2a2a2a] text-white/70 hover:bg-white/15 hover:text-white",
                 )}
               >

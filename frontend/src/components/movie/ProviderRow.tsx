@@ -133,7 +133,7 @@ export function ProviderRow() {
                           )}
                         >
                           {p.id === provider.id && (
-                            <span className="h-1.5 w-1.5 rounded-full bg-[#e50914]" />
+                            <span className="h-1.5 w-1.5 rounded-full bg-[#16a34a]" />
                           )}
                           <span className={p.id === provider.id ? "" : "ml-3.5"}>{p.label}</span>
                         </button>

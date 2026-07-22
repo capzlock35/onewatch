@@ -97,7 +97,7 @@ export function ContinueWatchingRow() {
                     </div>
                     {/* progress bar */}
                     <div className="absolute inset-x-0 bottom-0 h-1 bg-white/25">
-                      <div className="h-full bg-[#e50914]" style={{ width: `${pct}%` }} />
+                      <div className="h-full bg-[#16a34a]" style={{ width: `${pct}%` }} />
                     </div>
                   </div>
                 </button>

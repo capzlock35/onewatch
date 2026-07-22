@@ -94,7 +94,7 @@ export function Navbar() {
           <Link
             to="/"
             aria-label="Onewatch"
-            className="text-2xl font-black uppercase tracking-[-0.02em] text-[#e50914] transition-opacity hover:opacity-90 sm:text-[26px]"
+            className="text-2xl font-black uppercase tracking-[-0.02em] text-[#16a34a] transition-opacity hover:opacity-90 sm:text-[26px]"
           >
             Onewatch
           </Link>
@@ -175,7 +175,7 @@ export function Navbar() {
               <Link
                 to="/"
                 onClick={() => setMenuOpen(false)}
-                className="mb-8 mt-1 shrink-0 text-2xl font-black uppercase tracking-[-0.02em] text-[#e50914]"
+                className="mb-8 mt-1 shrink-0 text-2xl font-black uppercase tracking-[-0.02em] text-[#16a34a]"
               >
                 Onewatch
               </Link>
@@ -206,9 +206,9 @@ export function Navbar() {
                     setMenuOpen(false);
                     void promptInstall();
                   }}
-                  className="group mt-4 flex shrink-0 items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#e50914]/25 via-[#e50914]/10 to-transparent p-4 text-left transition active:scale-[0.98]"
+                  className="group mt-4 flex shrink-0 items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#16a34a]/25 via-[#16a34a]/10 to-transparent p-4 text-left transition active:scale-[0.98]"
                 >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#e50914] text-white shadow-lg shadow-[#e50914]/30 transition group-hover:scale-105">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#16a34a] text-white shadow-lg shadow-[#16a34a]/30 transition group-hover:scale-105">
                     <Download className="h-6 w-6" />
                   </span>
                   <span className="flex flex-col">
@@ -223,9 +223,9 @@ export function Navbar() {
               )}
 
               {iosInstall && (
-                <div className="mt-4 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#e50914]/25 via-[#e50914]/10 to-transparent p-4">
+                <div className="mt-4 shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#16a34a]/25 via-[#16a34a]/10 to-transparent p-4">
                   <div className="flex items-center gap-4">
-                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#e50914] text-white shadow-lg shadow-[#e50914]/30">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#16a34a] text-white shadow-lg shadow-[#16a34a]/30">
                       <Download className="h-6 w-6" />
                     </span>
                     <span className="flex flex-col">
@@ -241,13 +241,13 @@ export function Navbar() {
                     <li className="flex items-center gap-2">
                       <span className="text-white/45">1.</span>
                       Tap the
-                      <Share className="h-3.5 w-3.5 text-[#e50914]" />
+                      <Share className="h-3.5 w-3.5 text-[#16a34a]" />
                       Share button below
                     </li>
                     <li className="flex items-center gap-2">
                       <span className="text-white/45">2.</span>
                       Choose
-                      <Plus className="h-3.5 w-3.5 text-[#e50914]" />
+                      <Plus className="h-3.5 w-3.5 text-[#16a34a]" />
                       <span className="font-medium text-white/90">Add to Home Screen</span>
                     </li>
                   </ol>

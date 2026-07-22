@@ -13,9 +13,9 @@
 
   --color-border: rgba(255, 255, 255, 0.12);
   --color-input: #333333;
-  --color-ring: #e50914;
+  --color-ring: #16a34a;
 
-  --color-primary: #e50914;
+  --color-primary: #16a34a;
   --color-primary-foreground: #ffffff;
 
   --color-secondary: #2a2a2a;
@@ -24,7 +24,7 @@
   --color-accent: #2a2a2a;
   --color-accent-foreground: #ffffff;
 
-  --color-destructive: #e50914;
+  --color-destructive: #16a34a;
   --color-destructive-foreground: #ffffff;
 
   --radius: 0.25rem;
