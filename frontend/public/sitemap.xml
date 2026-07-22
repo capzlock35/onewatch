@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://onewatch.site/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://onewatch.site/browse</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://onewatch.site/category</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://onewatch.site/search</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <!-- Movie Genres -->
+  <url><loc>https://onewatch.site/genre/movie/28</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/12</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/16</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/35</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/80</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/99</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/18</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/10751</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/14</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/36</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/27</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/10402</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/9648</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/10749</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/878</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/10770</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/53</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/10752</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/movie/37</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <!-- TV Genres -->
+  <url><loc>https://onewatch.site/genre/tv/10759</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10762</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10763</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10764</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10765</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10766</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10767</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://onewatch.site/genre/tv/10768</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>

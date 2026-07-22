@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png?v=6" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=6" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=6" />
+    <link rel="shortcut icon" href="/favicon.ico?v=6" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png?v=6" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Onewatch" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#141414" />
+    <title>Onewatch — Watch Free Movies &amp; TV Shows Online | Free Streaming</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Onewatch - the best free movie website to watch movies and TV shows online without signup. Stream trending movies, popular series, and new releases in HD instantly."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://onewatch.site/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Onewatch" />
+    <meta property="og:title" content="Onewatch — Watch Free Movies &amp; TV Shows Online | Free Streaming" />
+    <meta property="og:description" content="Onewatch - the best free movie website to watch movies and TV shows online without signup. Stream trending movies, popular series, and new releases in HD instantly." />
+    <meta property="og:image" content="https://onewatch.site/meta_tag.png?v=7" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Onewatch — Free Movies & TV Shows Online" />
+    <meta property="og:url" content="https://onewatch.site/" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Onewatch — Watch Free Movies &amp; TV Shows Online" />
+    <meta name="twitter:description" content="Onewatch - the best free movie website to watch movies and TV shows online without signup. Stream trending movies, popular series, and new releases in HD instantly." />
+    <meta name="twitter:image" content="https://onewatch.site/meta_tag.png?v=7" />
+    <!-- /SEO -->
+
+    <!-- Structured data: tells Google the site name is "Onewatch" / "onewatch" -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "name": "Onewatch",
+            "alternateName": ["onewatch", "onewatch.site", "Onewatch", "free movie website"],
+            "url": "https://onewatch.site/",
+            "description": "Watch free movies and TV shows online without signup. The best free movie streaming site for trending titles, popular series, and new releases.",
+            "image": "https://onewatch.site/meta_tag.png?v=6",
+            "publisher": { "@id": "https://onewatch.site/#organization" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://onewatch.site/search?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://onewatch.site/#organization",
+            "name": "Onewatch",
+            "url": "https://onewatch.site/",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://onewatch.site/ONEWATCH_LOGO.png",
+              "width": 1024,
+              "height": 1024
+            }
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://onewatch.site/#webpage",
+            "name": "Onewatch - Free Movies & TV Shows Online",
+            "description": "The best free movie website to watch movies and TV shows online without signup.",
+            "url": "https://onewatch.site/",
+            "about": {
+              "@type": "Thing",
+              "name": "Free Movie Streaming"
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- Popunder ad -->
+    <script src="https://heavenlysuspicious.com/3c/aa/59/3caa592d7aeb93a0f813fe5931e4ba8f.js"></script>
+  </head>
+  <body class="bg-background text-foreground">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

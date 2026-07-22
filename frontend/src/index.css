@@ -1,0 +1,114 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --color-background: #141414;
+  --color-foreground: #ffffff;
+
+  --color-card: #181818;
+  --color-card-foreground: #ffffff;
+
+  --color-muted: #2a2a2a;
+  --color-muted-foreground: #b3b3b3;
+
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-input: #333333;
+  --color-ring: #e50914;
+
+  --color-primary: #e50914;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #2a2a2a;
+  --color-secondary-foreground: #ffffff;
+
+  --color-accent: #2a2a2a;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #e50914;
+  --color-destructive-foreground: #ffffff;
+
+  --radius: 0.25rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family:
+      "Inter",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Themed thin scrollbar — applied on every screen size.
+     Firefox */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primary) transparent;
+  }
+  /* WebKit / Chromium / Safari */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    /* 2px transparent border keeps the visible thumb thin (~4px) */
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    background-color: color-mix(in srgb, var(--color-primary) 80%, transparent);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-primary);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
+  /* Lenis smooth scroll — minimal runtime styles.
+     NB: we intentionally omit Lenis' default `iframe { pointer-events: none }`
+     rule so the inline video player and trailers stay clickable. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .text-shadow-hero {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  }
+}

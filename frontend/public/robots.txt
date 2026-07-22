@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /watchlist
+
+Sitemap: https://onewatch.site/sitemap.xml

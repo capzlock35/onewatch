@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "onewatch",
+  "main": "src/worker.ts",
+  "compatibility_date": "2025-09-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+  // TMDB_API_KEY is provided at runtime as a Cloudflare secret/variable
+  // (Workers → onewatch → Settings → Variables and secrets), not committed here.
+}
