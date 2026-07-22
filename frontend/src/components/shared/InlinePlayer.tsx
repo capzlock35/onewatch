@@ -202,10 +202,7 @@ export function InlinePlayer() {
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           allowFullScreen
           title={title ?? "player"}
-          {...(serverId === "zxc" && {
-            sandbox:
-              "allow-scripts allow-same-origin allow-forms allow-presentation allow-orientation-lock",
-          })}
+
         />
       ) : (
         <button
