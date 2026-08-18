@@ -14,6 +14,8 @@ export default function LanguagePage() {
       kind="movie"
       filters={{ with_original_language: code }}
       documentTitle={`${label} Movies - Onewatch | Free Streaming`}
+      seoPath={`/language/${code}`}
+      seoDescription={`Watch the best ${label} movies online free on Onewatch. Stream popular ${label}-language films in HD without signup.`}
     />
   );
 }

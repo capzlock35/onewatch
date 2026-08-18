@@ -6,6 +6,7 @@ import { MovieCard } from "@/components/movie/MovieCard";
 import { CardGridSkeleton } from "@/components/shared/Skeletons";
 import { profileUrl } from "@/lib/tmdb";
 import { cn } from "@/lib/utils";
+import { useSeo } from "@/lib/seo";
 import { personService } from "@/services/person.service";
 import type {
   TmdbMovie,
@@ -65,6 +66,29 @@ export default function PersonPage() {
   const [credits, setCredits] = useState<TmdbPersonCombinedCredits | null>(null);
   const [error, setError] = useState(false);
 
+  useSeo({
+    title: person
+      ? `${person.name} - Movies & TV Shows Filmography | Onewatch`
+      : "Actor & Actress Filmography | Onewatch",
+    description: person?.biography?.slice(0, 160) || undefined,
+    path: `/person/${id}`,
+    image: person?.profile_path ? `https://image.tmdb.org/t/p/w500${person.profile_path}` : undefined,
+    ogType: "profile",
+    jsonLd: person
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: person.name,
+          url: `https://onewatch.site/person/${id}`,
+          description: person.biography?.slice(0, 200),
+          image: person.profile_path ? `https://image.tmdb.org/t/p/w500${person.profile_path}` : undefined,
+          birthDate: person.birthday || undefined,
+          deathDate: person.deathday || undefined,
+          nationality: person.place_of_birth || undefined,
+        }
+      : undefined,
+  });
+
   useEffect(() => {
     if (!validId) {
       setError(true);
@@ -79,7 +103,6 @@ export default function PersonPage() {
       .then((p) => {
         if (cancelled) return;
         setPerson(p);
-        document.title = `${p.name} - Movies & TV Shows Filmography | Onewatch`;
       })
       .catch(() => !cancelled && setError(true));
     // Credits failing shouldn't block the whole page — fall back to an empty

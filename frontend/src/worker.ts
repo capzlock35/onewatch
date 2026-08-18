@@ -9,8 +9,35 @@ const TMDB_BASE = "https://api.themoviedb.org/3";
 const DEFAULT_TITLE = "Onewatch — Watch Free Movies & TV Shows Online | Free Streaming";
 const DEFAULT_DESC = "Onewatch - the best free movie website to watch movies and TV shows online without signup. Stream trending movies, popular series, and new releases in HD instantly.";
 
+const GENRE_NAMES: Record<number, string> = {
+  28: "Action", 12: "Adventure", 16: "Animation", 35: "Comedy", 80: "Crime",
+  99: "Documentary", 18: "Drama", 10751: "Family", 14: "Fantasy", 36: "History",
+  27: "Horror", 10402: "Music", 9648: "Mystery", 10749: "Romance", 878: "Sci-Fi",
+  10770: "TV Movie", 53: "Thriller", 10752: "War", 37: "Western",
+  10759: "Action & Adventure", 10762: "Kids", 10763: "News", 10764: "Reality",
+  10765: "Sci-Fi & Fantasy", 10766: "Soap", 10767: "Talk", 10768: "War & Politics",
+};
+
+const LANGUAGES: Record<string, string> = {
+  en: "English", ko: "Korean", ja: "Japanese", zh: "Chinese", es: "Spanish",
+  hi: "Hindi", fr: "French", de: "German", it: "Italian", pt: "Portuguese",
+  tr: "Turkish", th: "Thai", tl: "Filipino", id: "Indonesian", ar: "Arabic", ru: "Russian",
+};
+
 const ROUTE_META: Record<string, { title: string; description: string }> = {
   "/": { title: DEFAULT_TITLE, description: DEFAULT_DESC },
+  "/movies": {
+    title: "Movies - Onewatch | Watch Free Movies Online",
+    description: "Watch the best movies online free on Onewatch. Stream the latest releases, popular blockbusters, and top-rated films in HD without signup.",
+  },
+  "/tv-shows": {
+    title: "TV Shows - Onewatch | Watch Free TV Series Online",
+    description: "Watch the best TV shows online free on Onewatch. Stream popular series, top-rated dramas, and trending TV programs in HD without signup.",
+  },
+  "/anime": {
+    title: "Anime - Onewatch | Watch Free Anime Online",
+    description: "Watch anime online free on Onewatch. Stream the most popular Japanese anime series with English subtitles in HD without signup.",
+  },
   "/browse": {
     title: "Browse Movies & TV Shows - Onewatch | Free Streaming",
     description: "Browse trending movies, popular TV shows, and top-rated titles. Watch free movies online by genre.",
@@ -23,18 +50,26 @@ const ROUTE_META: Record<string, { title: string; description: string }> = {
     title: "Search Movies & TV Shows - Onewatch",
     description: "Search for movies and TV shows on Onewatch and watch them online for free.",
   },
+  "/watchlist": {
+    title: "My Watchlist - Onewatch | Save Movies & TV Shows",
+    description: "Your personal watchlist on Onewatch.",
+  },
 };
 
 function escapeHtml(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function metaBlock(title: string, description: string, image?: string, canonical?: string): string {
+function metaBlock(title: string, description: string, image?: string, canonical?: string, noindex = false): string {
   const tags = [
     `<title>${escapeHtml(title)}</title>`,
     `<meta name="description" content="${escapeHtml(description)}" />`,
+    `<meta name="robots" content="${noindex ? "noindex, nofollow" : "index, follow"}" />`,
     `<meta property="og:title" content="${escapeHtml(title)}" />`,
     `<meta property="og:description" content="${escapeHtml(description)}" />`,
+    `<meta property="og:type" content="website" />`,
+    `<meta property="og:site_name" content="Onewatch" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeHtml(title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(description)}" />`,
   ];
@@ -88,7 +123,8 @@ export default {
     let title = DEFAULT_TITLE;
     let desc = DEFAULT_DESC;
     let image: string | undefined;
-    let canonical = `${url.origin}${path}`;
+    const noindex = path === "/watchlist";
+    const canonical = `${url.origin}${path}`;
 
     // Check static routes first
     const routeMeta = ROUTE_META[path];
@@ -127,9 +163,19 @@ export default {
       // /genre/:type/:id
       const genreMatch = path.match(/^\/genre\/(movie|tv)\/(\d+)$/);
       if (genreMatch && !movieMatch && !tvMatch) {
-        const label = genreMatch[1] === "tv" ? "TV Shows" : "Movies";
-        title = `${label} - Onewatch | Free ${label} Streaming`;
-        desc = `Browse ${label.toLowerCase()} by genre on Onewatch. Watch free ${label.toLowerCase()} online instantly.`;
+        const type = genreMatch[1];
+        const label = type === "tv" ? "TV Shows" : "Movies";
+        const genreName = GENRE_NAMES[Number(genreMatch[2])] ?? "Genre";
+        title = `${genreName} ${label} - Onewatch | Free ${label} Streaming`;
+        desc = `Watch the best ${genreName} ${label.toLowerCase()} online free on Onewatch. Stream popular ${genreName} titles in HD without signup.`;
+      }
+
+      // /language/:code
+      const languageMatch = path.match(/^\/language\/([a-z]{2})$/);
+      if (languageMatch && !movieMatch && !tvMatch && !genreMatch) {
+        const lang = LANGUAGES[languageMatch[1]] ?? languageMatch[1].toUpperCase();
+        title = `${lang} Movies - Onewatch | Free Streaming`;
+        desc = `Watch the best ${lang} movies online free on Onewatch. Stream popular ${lang}-language films in HD without signup.`;
       }
 
       // /person/:id
@@ -146,7 +192,7 @@ export default {
     }
 
     // Inject the meta tags into the HTML
-    const metaHtml = metaBlock(title, desc, image, canonical);
+    const metaHtml = metaBlock(title, desc, image, canonical, noindex);
     const out = html.replace(
       /(<!-- SEO -->)[\s\S]*?(<!-- \/SEO -->)/,
       `$1\n    ${metaHtml}\n    $2`,

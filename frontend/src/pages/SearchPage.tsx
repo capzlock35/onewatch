@@ -7,6 +7,7 @@ import { CardGridSkeleton } from "@/components/shared/Skeletons";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { profileUrl } from "@/lib/tmdb";
+import { useSeo } from "@/lib/seo";
 import { movieService } from "@/services/movie.service";
 import { personService } from "@/services/person.service";
 import { tvService } from "@/services/tv.service";
@@ -18,10 +19,15 @@ export default function SearchPage() {
   const { q: initialQ } = searchRoute.useSearch();
   const [query, setQuery] = useState(initialQ ?? "");
 
-  useEffect(() => {
-    document.title = initialQ
+  useSeo({
+    title: initialQ
       ? `"${initialQ}" - Search Movies & TV Shows | Onewatch`
-      : "Search Movies & TV Shows - Onewatch";
+      : "Search Movies & TV Shows - Onewatch",
+    description: "Search thousands of movies and TV shows on Onewatch and watch them free online in HD.",
+    path: "/search",
+  });
+
+  useEffect(() => {
     if (typeof initialQ === "string") setQuery(initialQ);
   }, [initialQ]);
   const [movies, setMovies] = useState<TmdbMovie[]>([]);

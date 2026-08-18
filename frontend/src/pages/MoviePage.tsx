@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { backdropUrl, posterUrl, profileUrl } from "@/lib/tmdb";
 import { formatRuntime, formatYear } from "@/lib/utils";
+import { useSeo } from "@/lib/seo";
 import { movieService } from "@/services/movie.service";
 import { usePlayerStore } from "@/store/player.store";
 import { useWatchlistStore } from "@/store/watchlist.store";
@@ -32,6 +33,32 @@ export default function MoviePage() {
   const addToList = useWatchlistStore((s) => s.add);
   const removeFromList = useWatchlistStore((s) => s.remove);
 
+  useSeo({
+    title: movie
+      ? `${movie.title} (${movie.release_date ? movie.release_date.slice(0, 4) : ""}) - Watch Free Online | Onewatch`
+      : "Watch Movies Free Online | Onewatch",
+    description: movie?.overview?.slice(0, 160) || undefined,
+    path: `/movie/${id}`,
+    image: movie?.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : undefined,
+    ogType: "video.movie",
+    jsonLd: movie
+      ? {
+          "@context": "https://schema.org",
+          "@type": "Movie",
+          name: movie.title,
+          url: `https://onewatch.site/movie/${id}`,
+          description: movie.overview,
+          image: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : undefined,
+          datePublished: movie.release_date || undefined,
+          duration: movie.runtime ? `PT${movie.runtime}M` : undefined,
+          aggregateRating: movie.vote_average
+            ? { "@type": "AggregateRating", ratingValue: movie.vote_average.toFixed(1), bestRating: "10", ratingCount: movie.vote_count }
+            : undefined,
+          genre: movie.genres?.map((g) => g.name) || undefined,
+        }
+      : undefined,
+  });
+
   useEffect(() => {
     let cancelled = false;
     setMovie(null);
@@ -42,7 +69,6 @@ export default function MoviePage() {
     void movieService.details(movieId).then((m) => {
       if (cancelled) return;
       setMovie(m);
-      document.title = `${m.title} (${m.release_date ? m.release_date.slice(0, 4) : ""}) - Watch Free Online | Onewatch`;
     });
     void movieService.credits(movieId).then((c) => {
       if (cancelled) return;
@@ -84,28 +110,8 @@ export default function MoviePage() {
 
   const matchScore = movie.vote_average ? Math.round(movie.vote_average * 10) : 0;
 
-  const movieJsonLd = movie
-    ? {
-        "@context": "https://schema.org",
-        "@type": "Movie",
-        name: movie.title,
-        description: movie.overview,
-        image: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : undefined,
-        datePublished: movie.release_date || undefined,
-        duration: movie.runtime ? `PT${movie.runtime}M` : undefined,
-        aggregateRating: movie.vote_average
-          ? { "@type": "AggregateRating", ratingValue: movie.vote_average.toFixed(1), bestRating: "10", ratingCount: movie.vote_count }
-          : undefined,
-        genre: movie.genres?.map((g) => g.name) || undefined,
-        contentRating: movie.adult ? "R" : undefined,
-      }
-    : null;
-
   return (
     <article className="bg-[#141414] pb-16">
-      {movieJsonLd && (
-        <script type="application/ld+json">{JSON.stringify(movieJsonLd)}</script>
-      )}
       {isPlaying ? (
         <>
           <section className="w-full bg-black pt-[calc(5rem+env(safe-area-inset-top))]">

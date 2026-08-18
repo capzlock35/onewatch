@@ -5,6 +5,7 @@ import { HeroBanner } from "@/components/movie/HeroBanner";
 import { MovieRow } from "@/components/movie/MovieRow";
 import { ProviderRow } from "@/components/movie/ProviderRow";
 import { TopTenRow } from "@/components/movie/TopTenRow";
+import { useSeo } from "@/lib/seo";
 import { useMovieStore } from "@/store/movie.store";
 
 export default function HomePage() {
@@ -21,8 +22,25 @@ export default function HomePage() {
     loading,
   } = useMovieStore();
 
+  useSeo({
+    title: "Onewatch — Watch Free Movies & TV Shows Online | Free Streaming",
+    description:
+      "Onewatch - the best free movie website to watch movies and TV shows online without signup. Stream trending movies, popular series, and new releases in HD instantly.",
+    path: "/",
+    jsonLd: {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "Onewatch",
+      url: "https://onewatch.site/",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: "https://onewatch.site/search?q={search_term_string}",
+        "query-input": "required name=search_term_string",
+      },
+    },
+  });
+
   useEffect(() => {
-    document.title = "Onewatch — Watch Free Movies & TV Shows Online | Free Streaming";
     void loadHome();
   }, [loadHome]);
 

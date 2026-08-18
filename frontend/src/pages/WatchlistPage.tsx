@@ -4,13 +4,20 @@ import { Compass, ListVideo, X } from "lucide-react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import { posterUrl } from "@/lib/tmdb";
+import { useSeo } from "@/lib/seo";
 import { useWatchlistStore } from "@/store/watchlist.store";
 
 export default function WatchlistPage() {
   const { items, load, loaded, remove } = useWatchlistStore();
 
+  useSeo({
+    title: "My Watchlist - Onewatch | Save Movies & TV Shows",
+    description: "Your personal watchlist on Onewatch — save movies and TV shows to watch later.",
+    path: "/watchlist",
+    robots: "noindex, nofollow",
+  });
+
   useEffect(() => {
-    document.title = "My Watchlist - Onewatch | Save Movies & TV Shows";
     if (!loaded) void load();
   }, [loaded, load]);
 

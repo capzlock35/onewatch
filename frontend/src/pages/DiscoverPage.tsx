@@ -11,6 +11,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useSeo } from "@/lib/seo";
 import {
   discoverService,
   type DiscoverMovieParams,
@@ -40,6 +41,10 @@ export interface DiscoverPageProps {
   /** Extra discover filters (e.g. { with_genres: 16, with_original_language: "ja" }). */
   filters?: Record<string, string | number>;
   documentTitle?: string;
+  /** Absolute canonical path for this browse page, e.g. "/movies". */
+  seoPath?: string;
+  /** Meta description for search engines / social cards. */
+  seoDescription?: string;
 }
 
 /**
@@ -47,8 +52,17 @@ export interface DiscoverPageProps {
  * grid + "Show more" pagination. Powers Movies, TV Shows, Anime, and language
  * browse pages — all real TMDB content.
  */
-export function DiscoverPage({ title, kind, filters, documentTitle }: DiscoverPageProps) {
+export function DiscoverPage({ title, kind, filters, documentTitle, seoPath, seoDescription }: DiscoverPageProps) {
   const [sort, setSort] = useState<SortKey>("popular");
+
+  useSeo({
+    title: documentTitle ?? `${title} - Onewatch | Free Streaming`,
+    description:
+      seoDescription ??
+      `Watch ${title.toLowerCase()} free online on Onewatch. Stream the most popular and top-rated ${title.toLowerCase()} in HD without signup.`,
+    path: seoPath,
+  });
+
   const [items, setItems] = useState<(TmdbMovie | TmdbTvShow)[]>([]);
   const [hero, setHero] = useState<TmdbMovie | TmdbTvShow | null>(null);
   const [page, setPage] = useState(1);
@@ -57,10 +71,6 @@ export function DiscoverPage({ title, kind, filters, documentTitle }: DiscoverPa
   const [hasMore, setHasMore] = useState(true);
 
   const filtersKey = JSON.stringify(filters ?? {});
-
-  useEffect(() => {
-    document.title = documentTitle ?? `${title} - Onewatch | Free Streaming`;
-  }, [title, documentTitle]);
 
   async function fetchPage(p: number, key: SortKey): Promise<(TmdbMovie | TmdbTvShow)[]> {
     const base = {

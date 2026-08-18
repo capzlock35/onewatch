@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 import { MovieRow } from "@/components/movie/MovieRow";
 import { ContinueWatchingRow } from "@/components/movie/ContinueWatchingRow";
+import { useSeo } from "@/lib/seo";
 import { useMovieStore } from "@/store/movie.store";
 
 const GENRES = [
@@ -17,8 +18,14 @@ const GENRES = [
 export default function BrowsePage() {
   const { trending, popular, topRated, byGenre, loadHome, loadGenre, loading } = useMovieStore();
 
+  useSeo({
+    title: "Browse Movies & TV Shows - Onewatch | Free Streaming",
+    description:
+      "Browse and watch the latest trending movies and TV shows on Onewatch for free. Explore action, comedy, horror, drama, romance, sci-fi and more.",
+    path: "/browse",
+  });
+
   useEffect(() => {
-    document.title = "Browse Movies & TV Shows - Onewatch | Free Streaming";
     void loadHome();
     GENRES.forEach((g) => void loadGenre(g.id));
   }, [loadHome, loadGenre]);

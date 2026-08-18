@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
 import { GENRE_NAMES } from "@/lib/genres";
+import { useSeo } from "@/lib/seo";
 import { movieService } from "@/services/movie.service";
 import { tvService } from "@/services/tv.service";
 import type { MediaType, TmdbMovie, TmdbTvShow } from "@/types";
@@ -37,6 +38,14 @@ export default function GenrePage() {
   const genreId = Number(id);
   const genreName = GENRE_NAMES[genreId] ?? "Genre";
 
+  const genreLabel = mediaType === "tv" ? "TV Shows" : "Movies";
+
+  useSeo({
+    title: `${genreName} ${genreLabel} - Onewatch | Free ${genreLabel} Streaming`,
+    description: `Watch the best ${genreName} ${genreLabel.toLowerCase()} online free on Onewatch. Stream popular ${genreName} titles in HD without signup.`,
+    path: `/genre/${type}/${id}`,
+  });
+
   const [sort, setSort] = useState<SortKey>("popular");
   const [items, setItems] = useState<(TmdbMovie | TmdbTvShow)[]>([]);
   const [hero, setHero] = useState<TmdbMovie | TmdbTvShow | null>(null);
@@ -44,12 +53,6 @@ export default function GenrePage() {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(true);
-
-  // Set document title whenever genre changes
-  useEffect(() => {
-    const label = mediaType === "tv" ? "TV Shows" : "Movies";
-    document.title = `${genreName} ${label} - Onewatch | Free ${label} Streaming`;
-  }, [genreName, mediaType]);
 
   const service = useMemo(
     () => (mediaType === "tv" ? tvService : movieService),

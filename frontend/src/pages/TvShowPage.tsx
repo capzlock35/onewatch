@@ -12,6 +12,7 @@ import { EpisodeSelector } from "@/components/tv/EpisodeSelector";
 import { getLenis } from "@/hooks/useSmoothScroll";
 import { backdropUrl, posterUrl, profileUrl } from "@/lib/tmdb";
 import { formatYear } from "@/lib/utils";
+import { useSeo } from "@/lib/seo";
 import { tvService } from "@/services/tv.service";
 import { usePlayerStore } from "@/store/player.store";
 import { useWatchlistStore } from "@/store/watchlist.store";
@@ -34,6 +35,33 @@ export default function TvShowPage() {
   const watchlistItem = useWatchlistStore((s) => s.find("tv", tvId));
   const addToList = useWatchlistStore((s) => s.add);
   const removeFromList = useWatchlistStore((s) => s.remove);
+
+  useSeo({
+    title: show
+      ? `${show.name} (${show.first_air_date ? show.first_air_date.slice(0, 4) : ""}) - Watch Free Online | Onewatch`
+      : "Watch TV Shows Free Online | Onewatch",
+    description: show?.overview?.slice(0, 160) || undefined,
+    path: `/tv/${id}`,
+    image: show?.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : undefined,
+    ogType: "video.tv_show",
+    jsonLd: show
+      ? {
+          "@context": "https://schema.org",
+          "@type": "TVSeries",
+          name: show.name,
+          url: `https://onewatch.site/tv/${id}`,
+          description: show.overview,
+          image: show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : undefined,
+          datePublished: show.first_air_date || undefined,
+          numberOfSeasons: show.number_of_seasons,
+          numberOfEpisodes: show.number_of_episodes,
+          aggregateRating: show.vote_average
+            ? { "@type": "AggregateRating", ratingValue: show.vote_average.toFixed(1), bestRating: "10", ratingCount: show.vote_count }
+            : undefined,
+          genre: show.genres?.map((g) => g.name) || undefined,
+        }
+      : undefined,
+  });
 
   const playerRef = useRef<HTMLElement>(null);
 
@@ -58,7 +86,6 @@ export default function TvShowPage() {
     void tvService.details(tvId).then((s) => {
       if (cancelled) return;
       setShow(s);
-      document.title = `${s.name} (${s.first_air_date ? s.first_air_date.slice(0, 4) : ""}) - Watch Free Online | Onewatch`;
       const firstReal = s.seasons?.find((sn) => sn.season_number > 0);
       if (firstReal) setSeason(firstReal.season_number);
     });
@@ -96,28 +123,8 @@ export default function TvShowPage() {
     }
   };
 
-  const tvJsonLd = show
-    ? {
-        "@context": "https://schema.org",
-        "@type": "TVSeries",
-        name: show.name,
-        description: show.overview,
-        image: show.poster_path ? `https://image.tmdb.org/t/p/w500${show.poster_path}` : undefined,
-        datePublished: show.first_air_date || undefined,
-        numberOfSeasons: show.number_of_seasons,
-        numberOfEpisodes: show.number_of_episodes,
-        aggregateRating: show.vote_average
-          ? { "@type": "AggregateRating", ratingValue: show.vote_average.toFixed(1), bestRating: "10", ratingCount: show.vote_count }
-          : undefined,
-        genre: show.genres?.map((g) => g.name) || undefined,
-      }
-    : null;
-
   return (
     <article className="pb-16">
-      {tvJsonLd && (
-        <script type="application/ld+json">{JSON.stringify(tvJsonLd)}</script>
-      )}
       {isPlaying ? (
         <>
           <section ref={playerRef} className="w-full bg-black pt-[calc(5rem+env(safe-area-inset-top))]">

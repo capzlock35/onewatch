@@ -11,11 +11,20 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
+import { useSeo } from "@/lib/seo";
 import { movieService } from "@/services/movie.service";
 import type { TmdbGenre, TmdbMovie } from "@/types";
 
 export default function CategoryPage() {
   const [genres, setGenres] = useState<TmdbGenre[]>([]);
+
+  useSeo({
+    title: "Browse Movies by Genre - Onewatch | Free Movie Categories",
+    description:
+      "Find movies by category on Onewatch. Browse all movie genres — action, comedy, drama, horror, romance, sci-fi and more — and watch free online.",
+    path: "/category",
+  });
+
   const [activeId, setActiveId] = useState<number | null>(null);
   const [movies, setMovies] = useState<TmdbMovie[]>([]);
   const [page, setPage] = useState(1);
@@ -24,7 +33,6 @@ export default function CategoryPage() {
   const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    document.title = "Browse Movies by Genre - Onewatch | Free Movie Categories";
     let cancelled = false;
     void movieService.genres().then((g) => {
       if (cancelled) return;
