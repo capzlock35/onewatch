@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Check, ChevronDown, Play, Plus, ThumbsUp } from "lucide-react";
+import { Check, ChevronDown, Play, Plus, Star, ThumbsUp } from "lucide-react";
 
 import { backdropUrl, posterUrl } from "@/lib/tmdb";
 import { genreNames } from "@/lib/genres";
@@ -200,13 +200,16 @@ export function MovieCard({ item, mediaType, className }: MovieCardProps) {
         )}
       </div>
 
-      {/* Touch/mobile meta: image + title + tiny meta. Hidden on md+ (hover preview takes over). */}
-      <div className="mt-2 px-1 md:hidden">
+      {/* Meta: image + title + tiny meta. Always visible. */}
+      <div className="mt-2 px-1">
         <p className="line-clamp-1 text-sm font-semibold text-white">{title}</p>
         <div className="mt-1 flex items-center gap-1.5 text-xs text-white/60">
           {rating && (
             <>
-              <span className="font-semibold text-[#46d369]">{rating}</span>
+              <span className="flex items-center gap-1 font-semibold text-[#46d369]">
+                <Star className="h-3 w-3 fill-current" />
+                {rating}
+              </span>
               <span className="text-white/30">·</span>
             </>
           )}
