@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Check } from "lucide-react";
 import { Toaster } from "sonner";
 
+import { AdBanner } from "@/components/layout/AdBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { useThemeStore } from "@/store/theme.store";
@@ -35,6 +36,7 @@ function RootLayout() {
       <main className="flex-1 pt-0">
         <Outlet />
       </main>
+      <AdBanner />
       <Footer />
       <Toaster
         position="bottom-center"
